@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Printiva AI - Generator Desain Kaos Siap Cetak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="mark">P</div>
+        <div>
+          <h1>Printiva AI</h1>
+          <p>Pro Edition</p>
+        </div>
+      </div>
+      <div class="nav-title">Main Menu</div>
+      <nav class="nav" aria-label="Menu">
+        <button class="active" type="button" data-view="generator">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          Generator Sablon
+        </button>
+        <button type="button" data-view="brainstorm">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M4.93 19.07l2.83-2.83"/><path d="M16.24 7.76l2.83-2.83"/></svg>
+          Brainstorming
+        </button>
+        <button type="button" data-view="tutorial">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          Panduan & Tutorial
+        </button>
+      </nav>
+      <div class="side-note">
+        <strong>Mode Patuh Prompt</strong>
+        <span>Tools ini membantu mencegah AI menambahkan angka, logo, badge, atau ornamen liar pada desain.</span>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <span class="badge">Siap Cetak (Print Ready)</span>
+          <h2>Generator Desain Artwork Sablon</h2>
+          <p class="lead">Buat prompt spesifik untuk menghasilkan desain kaos yang kontras, tajam, dan aman dicetak via sablon manual maupun DTF.</p>
+        </div>
+      </header>
+
+      <!-- Generator View -->
+      <section class="view active" id="generator">
+        <div class="generator-layout">
+          <!-- Left Panel: Controls -->
+          <div class="panel controls-panel">
+            <form id="printivaForm" class="form">
+              <div class="section-title">Engine & Pengaturan Dasar</div>
+              <div class="grid-2">
+                <div class="form-group">
+                  <label for="aiEngine">AI Engine Target</label>
+                  <select id="aiEngine">
+                    <option value="midjourney">Midjourney (v6.0)</option>
+                    <option value="dalle3">DALL-E 3</option>
+                    <option value="sdxl">Stable Diffusion XL</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="printMethod">Teknik Sablon / Tinta</label>
+                  <select id="printMethod">
+                    <option value="dtf">DTF / Digital Print</option>
+                    <option value="plastisol">Sablon Manual (Plastisol)</option>
+                    <option value="discharge">Discharge (Cabut Warna)</option>
+                    <option value="waterbase">Waterbase</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="grid-2">
+                <div class="form-group">
+                  <label for="theme">Tema Desain Utama</label>
+                  <input type="text" id="theme" value="Taekwondo Championship" placeholder="Contoh: Taekwondo Championship" />
+                </div>
+                <div class="form-group">
+                  <label for="colors">Palet Warna Artwork</label>
+                  <input type="text" id="colors" value="Merah, putih, hitam" placeholder="Contoh: Merah, hitam, putih" />
+                </div>
+              </div>
+
+              <div class="section-title mt-4">Tipografi & Elemen Visual</div>
+              <div class="form-group">
+                <label for="mainText">Teks Utama (Tipografi Besar)</label>
+                <input type="text" id="mainText" value="TAEKWONDO IS MY PASSION" placeholder="Contoh: BORN TO FIGHT" />
+              </div>
+              <div class="form-group">
+                <label for="subText">Subteks (Opsional)</label>
+                <input type="text" id="subText" value="Respect - Power - Spirit" placeholder="Boleh dikosongkan" />
+              </div>
+
+              <div class="form-group">
+                <label for="elements">Elemen Visual Tambahan</label>
+                <textarea id="elements" placeholder="Contoh: Siluet atlet Taekwondo sedang menendang">Siluet atlet Taekwondo sedang melakukan tendangan tinggi, tanpa detail wajah.</textarea>
+              </div>
+
+              <div class="form-group">
+                <label>Gaya & Nuansa (Klik untuk menambah/mengurangi tag)</label>
+                <div class="tag-cloud" id="styleTags">
+                  <button type="button" class="tag active" data-tag="Minimalis Bersih">Minimalis</button>
+                  <button type="button" class="tag active" data-tag="Tipografi Tebal (Bold Typography)">Tipografi Tebal</button>
+                  <button type="button" class="tag" data-tag="Vintage Distressed (Tekstur Usang)">Vintage Distressed</button>
+                  <button type="button" class="tag" data-tag="Streetwear Grunge">Streetwear Grunge</button>
+                  <button type="button" class="tag" data-tag="Gaya Emblem/Badge">Gaya Emblem</button>
+                  <button type="button" class="tag" data-tag="Ilustrasi Halftone">Efek Halftone</button>
+                  <button type="button" class="tag" data-tag="Cyberpunk / Neon">Cyberpunk</button>
+                  <button type="button" class="tag" data-tag="Mascot Logo Style">Gaya Maskot</button>
+                  <button type="button" class="tag" data-tag="Retro 90s Anime">90s Anime</button>
+                </div>
+              </div>
+
+              <div class="section-title mt-4">Kontrol Komposisi</div>
+              <div class="grid-2">
+                <div class="form-group">
+                  <label for="humanMode">Tampilan Karakter/Manusia</label>
+                  <select id="humanMode">
+                    <option value="silhouette">Siluet saja (Tanpa Wajah / Anti Tasywir)</option>
+                    <option value="none">Tanpa karakter sama sekali</option>
+                    <option value="detailed">Karakter penuh (Detail Wajah)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="complexity">Tingkat Keramaian</label>
+                  <select id="complexity">
+                    <option value="clean">Clean (Elemen Sedikit, Fokus Typo)</option>
+                    <option value="medium">Medium (Seimbang)</option>
+                    <option value="complex">Kompleks (Ramai & Dinamis)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="strictMode">Mode Kepatuhan (Strictness)</label>
+                <select id="strictMode">
+                  <option value="strict">Mode Sangat Ketat (Jangan tambah logo/badge/angka)</option>
+                  <option value="flexible">Mode Kreatif (Boleh tambah elemen dekoratif yang cocok)</option>
+                </select>
+              </div>
+            </form>
+          </div>
+
+          <!-- Right Panel: Visualizer & Output -->
+          <div class="right-panel-group">
+            <div class="panel visualizer-panel">
+              <div class="visualizer-header">
+                <h3>Live T-Shirt Preview</h3>
+                <div class="shirt-colors">
+                  <button class="color-swatch active" style="background-color: #1a1a1a;" data-color="black" title="Kaos Hitam"></button>
+                  <button class="color-swatch" style="background-color: #ffffff; border: 1px solid #ccc;" data-color="white" title="Kaos Putih"></button>
+                  <button class="color-swatch" style="background-color: #1e3a8a;" data-color="navy" title="Kaos Navy"></button>
+                  <button class="color-swatch" style="background-color: #b91c1c;" data-color="red" title="Kaos Merah"></button>
+                  <button class="color-swatch" style="background-color: #9ca3af;" data-color="grey" title="Kaos Abu-abu"></button>
+                </div>
+              </div>
+              <div class="shirt-canvas-container" id="shirtCanvasContainer" data-shirt-color="black">
+                <svg class="shirt-silhouette" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet">
+                  <path d="M 120 50 Q 200 80 280 50 L 380 120 L 330 200 L 290 170 L 290 380 L 110 380 L 110 170 L 70 200 L 20 120 Z" fill="currentColor"/>
+                </svg>
+                <div class="artwork-preview">
+                  <div class="art-content">
+                    <h4 id="previewMainText">TAEKWONDO IS MY PASSION</h4>
+                    <p id="previewSubText">Respect - Power - Spirit</p>
+                    <div class="art-placeholder" id="previewElements">Siluet atlet Taekwondo sedang menendang</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel output-panel">
+              <div class="panel-header-flex">
+                <h3>Output Prompt Siap Copas</h3>
+                <div class="actions">
+                  <button class="btn primary" id="generatePromptBtn">Generate Prompt</button>
+                  <button class="btn secondary" id="copyPromptBtn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    Copy
+                  </button>
+                </div>
+              </div>
+              <div class="prompt-box" id="promptResult">
+                Klik "Generate Prompt" untuk membuat prompt berdasarkan pengaturan di samping. Output akan menyesuaikan engine AI yang Anda pilih (Midjourney / DALL-E / SDXL).
+              </div>
+              <div class="warning-box">
+                <strong>Catatan Produksi:</strong> Pastikan menghapus background (transparan) sebelum mencetak untuk sablon/DTF.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Brainstorming View -->
+      <section class="view" id="brainstorm">
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Brainstorming Ide Kaos</h3>
+            <p>Butuh inspirasi? Isi target pasar Anda, dan kami akan menyarankan konsep desain yang bisa langsung diterapkan ke form Generator dengan satu klik.</p>
+          </div>
+          <div class="form" style="padding: 24px;">
+            <div class="grid-2">
+              <div class="form-group">
+                <label for="bsTheme">Topik / Komunitas / Acara</label>
+                <input type="text" id="bsTheme" value="Klub Motor Klasik" />
+              </div>
+              <div class="form-group">
+                <label for="bsVibe">Nuansa (Vibe)</label>
+                <select id="bsVibe">
+                  <option value="vintage">Vintage & Retro</option>
+                  <option value="modern">Modern & Minimalis</option>
+                  <option value="aggressive">Agresif / Streetwear / Edgy</option>
+                  <option value="fun">Fun / Pop / Playful</option>
+                </select>
+              </div>
+            </div>
+            <button class="btn primary mt-4" id="generateBrainstormBtn">Buat Rekomendasi Konsep</button>
+            
+            <div class="brainstorm-results mt-4" id="brainstormResults" style="display: none;">
+              <div class="section-title mb-4">Konsep yang Dihasilkan:</div>
+              <div class="concept-cards" id="conceptCardsContainer">
+                <!-- Diisi via JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tutorial View -->
+      <section class="view" id="tutorial">
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Panduan Menggunakan Printiva AI</h3>
+            <p>Ikuti langkah ini untuk mendapatkan desain artwork sablon tanpa elemen bocor/liar dari AI.</p>
+          </div>
+          <div class="tutorial-content" style="padding: 24px;">
+            <div class="step-card">
+              <div class="step-num">1</div>
+              <div>
+                <h4>Pilih Engine AI</h4>
+                <p>Gunakan Midjourney untuk hasil paling artistik, DALL-E untuk teks yang lebih akurat, atau SDXL jika Anda ahli dalam inpainting dan kontrol komposisi.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-num">2</div>
+              <div>
+                <h4>Isi Parameter Utama</h4>
+                <p>Fokus pada teks utama dan warna. Jangan tambahkan elemen yang tidak penting. Semakin ringkas, semakin akurat AI merespon.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-num">3</div>
+              <div>
+                <h4>Pilih Mode Kepatuhan</h4>
+                <p>Jika AI sering menempelkan angka "04", bendera Amerika, atau badge tengkorak padahal Anda tidak memintanya, pastikan <strong>Mode Sangat Ketat</strong> terpilih. Prompt kami menggunakan <em>negative weights</em> untuk mencegah hal tersebut.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-num">4</div>
+              <div>
+                <h4>Generate & Copy</h4>
+                <p>Salin prompt yang dihasilkan dan tempelkan ke Discord Midjourney, ChatGPT, atau interface Stable Diffusion Anda.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-num">5</div>
+              <div>
+                <h4>Hapus Background</h4>
+                <p>AI selalu menghasilkan gambar dengan warna background (putih/hitam/gradient). Gunakan remove.bg, Photoshop, atau tools serupa untuk menjadikannya PNG transparan sebelum diserahkan ke vendor sablon.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+  <div class="toast" id="toast">Berhasil disalin ke clipboard!</div>
+  
+  <script src="app.js"></script>
+</body>
+</html>
