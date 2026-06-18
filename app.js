@@ -201,25 +201,58 @@ copyPromptBtn.addEventListener("click", () => {
 const conceptDb = {
   vintage: {
     fontTheme: "Vintage Distressed",
-    color: "Kuning mustard, putih kusam, navy",
     elements: "Ilustrasi gaya ukiran kayu tua atau badge lawas"
   },
   modern: {
     fontTheme: "Minimalis Bersih",
-    color: "Hitam, putih, abu-abu",
     elements: "Garis geometris tipis, bentuk abstrak rapi"
   },
   aggressive: {
     fontTheme: "Streetwear Grunge",
-    color: "Merah darah, hitam, putih",
     elements: "Garis agresif, cipratan halftone, siluet tajam"
   },
   fun: {
     fontTheme: "Retro 90s Anime",
-    color: "Pink neon, cyan, kuning",
     elements: "Garis tebal, ekspresi ceria, gaya kartun pop"
   }
 };
+
+function getColorsForVibe(topic, vibeKey) {
+  let hash = 0;
+  for (let i = 0; i < topic.length; i++) {
+    hash += topic.charCodeAt(i);
+  }
+  
+  const palettes = {
+    vintage: [
+      "Kuning mustard, putih kusam, navy",
+      "Coklat tanah, krem, hijau army",
+      "Merah marun, emas pudar, hitam",
+      "Biru denim, putih tulang, abu-abu gelap"
+    ],
+    modern: [
+      "Hitam, putih, abu-abu",
+      "Biru dongker, putih, perak",
+      "Sage green, putih, hitam mamba",
+      "Monokrom hitam putih kontras"
+    ],
+    aggressive: [
+      "Merah darah, hitam pekat, putih",
+      "Kuning hazard, hitam, abu-abu",
+      "Oranye api, hitam, putih terang",
+      "Hijau neon, hitam pekat, silver"
+    ],
+    fun: [
+      "Pink neon, cyan, kuning lemon",
+      "Ungu pastel, tosca, putih",
+      "Kuning cerah, biru langit, putih",
+      "Mint green, peach, pink ceria"
+    ]
+  };
+  
+  const options = palettes[vibeKey] || palettes.modern;
+  return options[hash % options.length];
+}
 
 generateBrainstormBtn.addEventListener("click", () => {
   const topic = bsTheme.value.trim() || "Klub Motor";
@@ -232,7 +265,7 @@ generateBrainstormBtn.addEventListener("click", () => {
       mainText: `${topic.toUpperCase()} SQUAD`,
       subText: "Est. 2024 - No Limit",
       elements: `Tanpa elemen rumit, fokus tipografi tebal. ${vibeData.elements}`,
-      colors: vibeData.color,
+      colors: getColorsForVibe(topic, vibeKey),
       tags: [vibeData.fontTheme, "Tipografi Tebal (Bold Typography)"]
     },
     {
@@ -240,7 +273,7 @@ generateBrainstormBtn.addEventListener("click", () => {
       mainText: `${topic.toUpperCase()}`,
       subText: "Original Culture",
       elements: `Bentuk badge bundar/perisai dengan ikon ${topic}. ${vibeData.elements}`,
-      colors: vibeData.color,
+      colors: getColorsForVibe(topic + "alternatif", vibeKey),
       tags: ["Gaya Emblem/Badge", vibeData.fontTheme]
     }
   ];
